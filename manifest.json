@@ -1,5 +1,5 @@
 {
-  "name": "Transliterate",
+  "name": "Easy Transliterate",
   "description": "Transliterate selected text using Google's API",
   "version": "0.1",
   "permissions": ["contextMenus","tabs","*"],
