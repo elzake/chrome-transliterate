@@ -1,0 +1,35 @@
+<script src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("elements", "1", {
+    packages: "transliteration" });
+
+function camelize(s) {
+    return s.substr(0,1).toLocaleUpperCase()
+         + s.substr(1).toLocaleLowerCase()
+}
+
+function update() {
+    var sel = document.getElementById('default-lang'),
+        seli = sel.options[sel.selectedIndex];
+    
+    localStorage['default-lang'] = seli.value;
+    
+    chrome.contextMenus.update(parseInt(localStorage['menu-id']), {
+        title: "Transliterate to " + seli.innerText,
+    })
+}
+
+window.onload = function() {
+    var lc = google.elements.transliteration.LanguageCode,
+        def = localStorage['default-lang'] || "hi";
+    for (var k in lc) {
+        var v = lc[k], ek = camelize(k);
+        var opt = document.createElement("option");
+        opt.innerHTML = ek;
+        opt.value = v;
+        opt.selected = def == v;
+        document.getElementById('default-lang').appendChild( opt );
+    }
+}
+</script>
+<label for="default-lang">Default language: </label> <select id="default-lang" name="default-lang" onchange="update()"></select>

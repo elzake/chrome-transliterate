@@ -1,0 +1,12 @@
+{
+  "name": "Transliterate",
+  "description": "Transliterate selected text using Google's API",
+  "version": "0.1",
+  "permissions": ["contextMenus","tabs","*"],
+  "background_page": "background.html",
+  "options_page": "options.html",
+  "content_scripts": [ {
+    "matches": ["*://*/*"],
+    "js": ["handleClick.js"]
+  } ]
+}
